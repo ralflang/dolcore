@@ -38,6 +38,15 @@ class Dolcore_Application extends Horde_Registry_Application
      */
     public $version = 'H5 (0.1-git)';
 
+    /**
+     * @var array $auth
+     * List of authentication capabilities exposed
+     */
+    public $auth = array(
+        'authenticate',
+        'list'
+    );
+
 
     protected function _init()
     {
@@ -46,6 +55,25 @@ class Dolcore_Application extends Horde_Registry_Application
              $this->auth = $GLOBALS['injector']->getInstance('Dolcore_Factory_Auth')->create($GLOBALS['injector']);
         } catch (Dolcore_Exception $e) {
             $GLOBALS['notification']->notify($e->getMessage());
+        }
+    }
+
+    /**
+     * Application Authentication proxy: userExists
+     */
+    public function authUserExists($userId)
+    {
+        return $this->auth->exists($userId);
+    }
+
+    /**
+     * @param array $credentials  Array of criedentials (password requied)
+     */
+    public function authAuthenticate($userID, $credentials)
+    {
+        $this->auth->authenticate($userID, $credentials);
+        if ($this->auth->getError()) {
+            throw new Horde_Auth_Exception($this->auth->getError(true), $this->auth->getError());
         }
     }
 
