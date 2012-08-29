@@ -38,12 +38,17 @@ class Dolcore_Application extends Horde_Registry_Application
      */
     public $version = 'H5 (0.1-git)';
 
-    /**
-     */
-    protected function _bootstrap()
+
+    protected function _init()
     {
-        $GLOBALS['injector']->bindFactory('Dolcore_Driver', 'Dolcore_Factory_Driver', 'create');
+        try {
+             $this->driver = $GLOBALS['injector']->getInstance('Dolcore_Factory_Driver')->create($GLOBALS['injector']);
+             $this->auth = $GLOBALS['injector']->getInstance('Dolcore_Factory_Auth')->create($GLOBALS['injector']);
+        } catch (Dolcore_Exception $e) {
+            $GLOBALS['notification']->notify($e->getMessage());
+        }
     }
+
 
     /**
      */
