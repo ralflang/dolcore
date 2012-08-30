@@ -21,11 +21,15 @@ class Dolcore_Driver_Sql extends Dolcore_Driver
     protected $_db;
 
     /**
-     * Storage variable.
-     *
-     * @var array
+     * The mapper factory
+     * @var Horde_Rdo_Factory
+     * @access protected
      */
-    protected $_foo = array();
+    protected $_mappers;
+
+
+    protected $_categoriesApi;
+    protected $_discussionApi;
 
     /**
      * Constructs a new SQL storage object.
@@ -48,52 +52,33 @@ class Dolcore_Driver_Sql extends Dolcore_Driver
         parent::__construct($params);
     }
 
+
+
+
     /**
-     * Retrieves the foos from the database.
+     * Retrieves the categories Api.
      *
      * @throws Dolcore_Exception
      */
-    public function retrieve()
+    public function getCategoriesApi()
     {
-        /* Build the SQL query. */
-
-        // Unrestricted query
-
-        $query = 'SELECT * FROM dolcore_items';
-
-        // Restricted query alternative
-
-        //$query = 'SELECT * FROM dolcore_items WHERE foo = ?';
-        //$values = array($this->_params['bar']);
-
-        /* Execute the query. */
-        try {
-            $rows = $this->_db->selectAll($query, $values);
-        } catch (Horde_Db_Exception $e) {
-            throw new Dolcore_Exception($e);
+        if (!$this->_categoriesApi) {
+            $this->_categoriesApi = new Dolcore_Category(array('db' => $this->_db));
         }
-
-        /* Store the retrieved values in the foo variable. */
-        $this->_foo = array_merge($this->_foo, $rows);
+        return $this->_categoriesApi;
     }
 
     /**
-     * Stores a foo in the database.
+     * Retrieves the discussion Api.
      *
-     * @throws Sms_Exception
+     * @throws Dolcore_Exception
      */
-    public function store($data)
+    public function getDiscussionApi()
     {
-        $query = 'INSERT INTO dolcore_items' .
-                 ' (item_owner, item_data)' .
-                     ' VALUES (?, ?)';
-        $values = array($GLOBALS['registry']->getAuth(),
-                        $data);
-
-        try {
-            $this->_db->insert($query, $values);
-        } catch (Horde_Db_Exception $e) {
-            throw new Sms_Exception($e->getMessage());
+        if (!$this->_discussionApi) {
+            $this->_discussionApi = new Dolcore_Discussion(array('db' => $this->_db));
         }
+        return $this->_discussionApi;
     }
+
 }
