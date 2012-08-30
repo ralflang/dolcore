@@ -53,6 +53,7 @@ class Dolcore_Application extends Horde_Registry_Application
         try {
              $this->driver = $GLOBALS['injector']->getInstance('Dolcore_Factory_Driver')->create($GLOBALS['injector']);
              $this->auth = $GLOBALS['injector']->getInstance('Dolcore_Factory_Auth')->create($GLOBALS['injector']);
+             $this->category = $GLOBALS['injector']->getInstance('Dolcore_Factory_Category')->create($GLOBALS['injector']);
         } catch (Dolcore_Exception $e) {
             $GLOBALS['notification']->notify($e->getMessage());
         }
