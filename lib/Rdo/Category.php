@@ -6,6 +6,9 @@
  */
 class Dolcore_Rdo_Category extends Horde_Rdo_Base
 {
-
+    public function getCaption()
+    {
+        return htmlspecialchars($this->text, null, 'UTF-8', false);
+    }
 
 }
