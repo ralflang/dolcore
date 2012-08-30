@@ -1,6 +1,6 @@
 <?php
 /**
- * Dolcore_Auth factory.
+ * Dolcore_Category factory.
  *
  * Create the business module for Dol2day authentication related stuff
  * Copyright 2012 dol2day GbR
@@ -13,7 +13,7 @@
  * @license  http://www.horde.org/licenses/gpl GPL
  * @package  Dolcore
  */
-class Dolcore_Factory_Auth extends Horde_Core_Factory_Injector
+class Dolcore_Factory_Category extends Horde_Core_Factory_Injector
 {
     /**
      * @var array
@@ -21,9 +21,9 @@ class Dolcore_Factory_Auth extends Horde_Core_Factory_Injector
     private $_instances = array();
 
     /**
-     * Return an Dolcore_Auth instance.
+     * Return an Dolcore_Category instance.
      *
-     * @return Dolcore_Auth
+     * @return Dolcore_Category
      */
     public function create(Horde_Injector $injector)
     {
@@ -45,7 +45,7 @@ class Dolcore_Factory_Auth extends Horde_Core_Factory_Injector
                 $params = array('db' => $db);
                 break;
             }
-            $class = 'Dolcore_Auth';
+            $class = 'Dolcore_Category';
             $this->_instances[$signature] = new $class($params);
         }
 
