@@ -1,15 +1,10 @@
 <?php
 /**
- * Copyright 2008-2012 Horde LLC (http://www.horde.org/)
- *
- * See the enclosed file LICENSE for license information (BSD). If you did
- * did not receive this file, see http://cvs.horde.org/co.php/jonah/LICENSE.
- *
- * @author Ben Klang <ben@alkaloid.net>
+ * The Dispatcher
  */
 
 require_once __DIR__ . '/lib/Application.php';
-$jonah = Horde_Registry::appInit('dolcore', array(
+$dolcore = Horde_Registry::appInit('dolcore', array(
     'authentication' => 'none',
     'session_control' => 'readonly'
 ));
