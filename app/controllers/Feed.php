@@ -7,14 +7,13 @@ class Dolcore_Feed_Controller extends Horde_Controller_Base
         $this->_matchDict = new Horde_Support_Array($this->_mapper->match($request->getPath()));
 
         $injector = $this->getInjector();
-        $parts = explode('/',$request->getPath());
 
         switch ($this->_matchDict->action) {
             case 'category':
                 $driver = $injector->getInstance('Dolcore_Factory_Driver')->create($injector);
                 $categories = $driver->getCategoriesApi();
                 $discussionApi = $driver->getDiscussionApi();
-                $category = $categories->getCategory($parts[4]);
+                $category = $categories->getCategory($this->_matchDict->category);
                 /* Write a category's currently running Umfragen */
                 $now = new Horde_Date(time());
 
@@ -22,7 +21,7 @@ class Dolcore_Feed_Controller extends Horde_Controller_Base
 
                 $template->set('updated', $now->format(DATE_ATOM));
                 $template->set('category_caption', $category->getCaption());
-                $template->set('category_id', $parts[4]);
+                $template->set('category_id', $category->id);
 
                 $discussions = array();
 
