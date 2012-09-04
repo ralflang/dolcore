@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="<tag:xsl />" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><tag:category_caption /></title>
+  <id><tag:category_id /></id>
+<!--  <link rel="self" href="<tag:self_url />"/>-->
+  <author>
+      <name>Dol2day</name>
+  </author>
+  <updated><tag:updated /></updated>
+
+  <loop:discussions>
+  <entry>
+    <title><tag:discussions.title /></title>
+    <link href="<tag:discussions.url />"/>
+    <id><tag:discussions.url /></id>
+    <updated><tag:discussions.modified /></updated>
+    <summary type="html"><tag:discussions.details /></summary>
+<!--    <options>sdfs</options>-->
+    <!--    <if:entries.category>
+    <category term="<tag:entries.category />" />
+    </if:entries.category>-->
+  </entry>
+  </loop:discussions>
+
+</feed>

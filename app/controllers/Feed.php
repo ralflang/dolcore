@@ -29,6 +29,8 @@ class Dolcore_Feed_Controller extends Horde_Controller_Base
                     $discussions[$discussion->id]['title'] = $discussion->text;
                     $discussions[$discussion->id]['details'] = $discussion->hintergrund;
                     $discussions[$discussion->id]['modified'] = $discussion->erstelldatum;
+                    $discussions[$discussion->id]['id'] = Dolcore::getUrlFor('discussion', array('discussion_id' => $discussion->id), true, true );
+                    $discussions[$discussion->id]['url'] = Dolcore::getUrlFor('discussion', array('discussion_id' => $discussion->id), true, true );
                 }
                 $template->set('discussions', $discussions);
 

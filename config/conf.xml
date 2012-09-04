@@ -12,4 +12,9 @@
    </case>
   </configswitch>
  </configsection>
+
+ <configsection name="path">
+    <configstring name="dol2day_front" desc="The path to the dol2day web-accessible parts">http://www.dol2day.com</configstring>
+    <configstring name="dol2day_core" desc="The path to the dol2day core">http://core.dol2day.com</configstring>
+ </configsection>
 </configuration>
